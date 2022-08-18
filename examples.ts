@@ -1,8 +1,7 @@
-import { Bad } from './parsers/main.ts';
+import { BenoParsers } from './parsers/main.ts';
 
-const bad = Bad({ encoder: 'toml' });
-const good = new bad();
+const beno = new BenoParsers({ encoder: 'json' });
 
-good.load();
+beno.load();
 
-good.get({ prop: 'xd' });
+beno.get({ prop: 'xd' });

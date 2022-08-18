@@ -1,13 +1,13 @@
-# bad-cfg
+# Beno :mage:
 
 ---
 
 Dont make your config experience bad only disfrute with this
 
-## Why this name? :nerd_face:
+## Why this name? :notes:
 
 Simple I dont know a name for this project but I am listening Bad Bunny and why
-not call this **Bad-Cfg**
+not call this **Beno**
 
 ## Information :book:
 
