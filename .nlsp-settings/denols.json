@@ -1,0 +1,9 @@
+{
+  "deno": {
+    "enable": true,
+    "lint": true,
+    "unstable": true,
+    "importMap": "./dpm_imports.json",
+    "config": "./deno.json"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://dpmland.deno.dev/schema",
+  "name": "bad-cfg",
+  "version": "0.1.0",
+  "description": "Dont make your config experience bad only disfrute with this",
+  "author": "The DPM Authors Team",
+  "license": "MIT",
+  "main": "mod.ts",
+  "scripts": {
+    "test": "deno test -A --unstable",
+    "fmt": "deno fmt -c deno.json",
+    "lint": "deno lint -c deno.json"
+  },
+  "dependencies": {
+    "draco/": "0.1.3",
+    "path/": "0.152.0",
+    "encoding/": "0.152.0",
+    "dlog2/": "2.0",
+    "fmt/": "0.152.0"
+  }
+}

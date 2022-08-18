@@ -1,0 +1,20 @@
+{
+  "name": "bad-cfg",
+  "entry": "mod.ts",
+  "description": "Dont make your config experience bad only disfrute with this",
+  "homepage": "https://github.com/the_name/bad-cfg",
+  "unstable": true,
+  "unlisted": false,
+  "releaseType": "patch",
+  "files": [
+    "./mod.ts",
+    "./src/**/*",
+    "./README.md"
+  ],
+  "ignore": [
+    ".git"
+  ],
+  "checkFormat": "deno task fmt:check",
+  "checkInstallation": "deno test",
+  "check": false
+}
