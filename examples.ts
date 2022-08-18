@@ -1,7 +1,5 @@
-import { BenoParsers } from './parsers/main.ts';
+import { Beno } from './mod.ts';
 
-const beno = new BenoParsers({ encoder: 'json' });
-
-beno.load();
+const beno = new Beno({ encoder: 'json' });
 
 beno.get({ prop: 'xd' });

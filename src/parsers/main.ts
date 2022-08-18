@@ -1,26 +1,10 @@
 import { parse as parseJSONC } from 'encoding/jsonc.ts';
-import { parse as parseCSV, stringify as stringifyCSV } from 'encoding/csv.ts';
-import { parse as parseYML, stringify as stringifyYML } from 'encoding/yaml.ts';
-import {
-  parse as parseTOML,
-  stringify as stringifyTOML,
-} from 'encoding/toml.ts';
-import { join } from 'path/mod.ts';
+import { extname, join } from 'path/mod.ts';
+import { BenoTypes, GetType } from './types.d.ts';
 
-//Interface for the return type
-interface BenoTypes {
-  encoder: 'toml' | 'json' | 'yaml' | 'jsonc' | 'csv';
-  path?: string;
-  envPath?: string;
-}
-
-interface GetType {
-  prop: string;
-}
-
-// Interface for define all types for the functions
+// Methods for Parsers
 interface BenoCfgFunctions {
-  load(path?: string, env?: string): void;
+  config(path?: string, env?: string): void;
   get(cfg: GetType): void;
 }
 
@@ -30,7 +14,7 @@ export class BenoParsers implements BenoCfgFunctions {
     this.props.envPath = join(Deno.cwd(), '.env');
   }
 
-  load(path?: string | undefined, env?: string | undefined): void {
+  config(path?: string | undefined, env?: string | undefined): void {
     /** Make a validation */
 
     // Helpers for the Params
@@ -55,8 +39,10 @@ export class BenoParsers implements BenoCfgFunctions {
 
   get(cfg: GetType): void {
     console.log(cfg.prop);
-    console.log(this.props.path);
-    console.log(this.props.envPath);
-    console.log(this.props.encoder);
+    for (const e of Deno.readDirSync(this.props.path!)) {
+      if (e.isFile && extname(e.name).substring(1) == this.props.encoder) {
+        console.log(e.name);
+      }
+    }
   }
 }
