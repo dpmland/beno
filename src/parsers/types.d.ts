@@ -3,7 +3,3 @@ export interface BenoTypes {
   path?: string;
   envPath?: string;
 }
-
-export interface GetType {
-  prop: string;
-}
