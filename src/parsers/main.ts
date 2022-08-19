@@ -51,17 +51,16 @@ export class BenoParsers implements BenoCfgFunctions {
 
   get(key: string): unknown | undefined {
     const content = this.content();
+
     if (content == undefined) {
       throw new Error(
         'Beno ERROR: Not defined the content not found a valid file in the directory or not found the directory',
       );
     }
-    for (const i of content) {
-      for (const k of Object.keys(i)) {
-        if (k == key) {
-          return i[key];
-        }
-      }
+    const target = content.find((i) => key in i);
+    if (target == undefined) {
+      return undefined;
     }
+    return target[key];
   }
 }
