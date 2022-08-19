@@ -1,9 +1,7 @@
 {
   "imports": {
-    "draco/": "https://deno.land/x/draco@0.1.3/",
     "path/": "https://deno.land/x/std@0.152.0/path/",
     "encoding/": "https://deno.land/x/std@0.152.0/encoding/",
-    "dlog2/": "https://deno.land/x/dlog2@2.0/",
     "fmt/": "https://deno.land/x/std@0.152.0/fmt/"
   }
 }
