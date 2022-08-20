@@ -1,7 +1,7 @@
 import { parse as parseJSONC } from 'encoding/jsonc.ts';
 import { basename, extname, join } from 'path/mod.ts';
-import { BenoTypes } from './src/parsers/types.d.ts';
-import { benoMagicReader } from './src/parsers/reader.ts';
+import { BenoSetTypes, BenoTypes } from './src/parsers/types.d.ts';
+import { benoMagicReader, benoOneFile } from './src/parsers/reader.ts';
 import { Validate } from './src/validator.ts';
 
 // Methods for Parsers
@@ -9,7 +9,7 @@ interface BenoCfgFunctions {
   config(path?: string, env?: string): void;
   get(key: string): unknown | undefined;
   content(): Record<string, unknown>[] | undefined;
-  set(filename: string, value: unknown): void;
+  set(filename: string, object: BenoSetTypes): void;
 }
 
 export class Beno implements BenoCfgFunctions {
@@ -63,7 +63,7 @@ export class Beno implements BenoCfgFunctions {
     return new Validate((target ?? {})[key]);
   }
 
-  set(filename: string, value: unknown): void {
+  set(filename: string, object: BenoSetTypes): void {
     const content = this.content();
 
     if (content == undefined) {
@@ -71,8 +71,42 @@ export class Beno implements BenoCfgFunctions {
         'Beno ERROR: Not defined the content not found a valid file in the directory or not found the directory',
       );
     }
+
     content.map((e) => {
-      console.log(e);
+      if (extname(filename) != '') {
+        filename = filename.replace(`.${this.props.encoder}`, '');
+      }
+      if (typeof e.BENO_INTERNALS_FILEPATH == 'string') {
+        if (
+          filename ==
+            basename(e.BENO_INTERNALS_FILEPATH).replace(
+              `.${this.props.encoder}`,
+              '',
+            )
+        ) {
+          const obj = benoOneFile(
+            e.BENO_INTERNALS_FILEPATH,
+            this.props.encoder,
+          );
+
+          obj[object.key] = object.val;
+
+          try {
+            Deno.writeTextFileSync(
+              e.BENO_INTERNALS_FILEPATH,
+              JSON.stringify(obj, null, 2),
+            );
+          } catch (e) {
+            throw new Error(
+              `Beno ERROR: Is not possible write the file error.\n${e}`,
+            );
+          }
+        }
+      } else {
+        throw new Error(
+          `Beno ERROR: Not valid internal path please report this on github maybe a Bug`,
+        );
+      }
     });
   }
 }

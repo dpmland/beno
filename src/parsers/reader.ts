@@ -1,5 +1,24 @@
 import * as JSONC from 'encoding/jsonc.ts';
 
+export function benoOneFile(
+  file: string,
+  encoder: 'json' | 'jsonc',
+) {
+  try {
+    if (encoder == 'json') {
+      return JSON.parse(Deno.readTextFileSync(file));
+    } else {
+      return JSONC.parse(Deno.readTextFileSync(file)) as Record<
+        string,
+        unknown
+      >;
+    }
+  } catch (e) {
+    if (e instanceof Deno.errors.NotFound) return;
+    throw new Error(`Beno ERROR: ${e}`);
+  }
+}
+
 // @desc Read a file if exists and if return none not exists
 export function benoMagicReader(
   files: string[],
@@ -8,20 +27,9 @@ export function benoMagicReader(
   try {
     const content: Record<string, unknown>[] = [];
     for (const i of files) {
-      if (encoder == 'json') {
-        const objCont = JSON.parse(Deno.readTextFileSync(i));
-        // Append a key for a path!
-        objCont['BENO_INTERNALS_FILEPATH'] = i;
-        content.push(objCont);
-      } else {
-        const objCont = JSONC.parse(Deno.readTextFileSync(i)) as Record<
-          string,
-          unknown
-        >;
-        // Append a key for a path!
-        objCont['BENO_INTERNALS_FILEPATH'] = i;
-        content.push(objCont);
-      }
+      const obj = benoOneFile(i, encoder);
+      obj['BENO_INTERNALS_FILEPATH'] = i;
+      content.push(obj);
     }
     return content;
   } catch (e) {

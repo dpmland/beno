@@ -3,3 +3,8 @@ export interface BenoTypes {
   path?: string;
   envPath?: string;
 }
+
+export interface BenoSetTypes {
+  key: string;
+  val: string;
+}
