@@ -1,4 +1,3 @@
-import { parse as parseJSONC } from 'encoding/jsonc.ts';
 import { basename, extname, join } from 'path/mod.ts';
 import { BenoSetTypes, BenoTypes } from './src/parsers/types.d.ts';
 import { benoMagicReader, benoOneFile } from './src/parsers/reader.ts';
@@ -9,10 +8,12 @@ interface BenoCfgFunctions {
   config(path?: string, env?: string): void;
   get(key: string): unknown | undefined;
   content(): Record<string, unknown>[] | undefined;
-  set(filename: string, object: BenoSetTypes): void;
+  set(filename: string, object: BenoSetTypes): boolean;
 }
 
 export class Beno implements BenoCfgFunctions {
+  version = '0.1.0';
+
   constructor(private props: BenoTypes) {
     this.props.path = join(Deno.cwd(), 'config');
     this.props.envPath = join(Deno.cwd(), '.env');
@@ -63,7 +64,7 @@ export class Beno implements BenoCfgFunctions {
     return new Validate((target ?? {})[key]);
   }
 
-  set(filename: string, object: BenoSetTypes): void {
+  set(filename: string, object: BenoSetTypes): boolean {
     const content = this.content();
 
     if (content == undefined) {
@@ -101,6 +102,7 @@ export class Beno implements BenoCfgFunctions {
               `Beno ERROR: Is not possible write the file error.\n${e}`,
             );
           }
+          return true;
         }
       } else {
         throw new Error(
@@ -108,5 +110,7 @@ export class Beno implements BenoCfgFunctions {
         );
       }
     });
+
+    return false;
   }
 }
