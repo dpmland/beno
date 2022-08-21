@@ -1,21 +1,28 @@
 {
   "$schema": "https://x.nest.land/eggs@0.3.10/src/schema.json",
   "name": "beno",
-  "entry": "mod.ts",
+  "entry": "./mod.ts",
   "description": "Do you want to manage the settings of your apps? Make it easy with the help of Beno",
   "homepage": "https://github.com/dpmland/beno",
+  "version": "1.0.0",
+  "releaseType": "major",
   "unstable": false,
   "unlisted": false,
-  "releaseType": "major",
   "files": [
     "./mod.ts",
-    "./src/**/*",
-    "./README.md"
+    "./README.md",
+    "./src/**/*"
   ],
   "ignore": [
-    ".git"
+    "LICENSE",
+    "deno.json",
+    "dpm.json",
+    "eggs.json",
+    "./.git",
+    ".editorconfig"
   ],
   "checkFormat": "deno task fmt:check",
+  "checkTests": false,
   "checkInstallation": true,
-  "check": false
+  "check": true
 }
