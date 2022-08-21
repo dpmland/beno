@@ -11,7 +11,7 @@
   "tasks": {
     "test": "deno test -A --unstable",
     "fmt": "deno fmt -c deno.json",
-    "fmt:check": "deno fmt -c deno.json --check && deno lint -c deno.json",
+    "fmt:check": "deno fmt -c deno.jsonc --check && deno lint -c deno.json",
     "lint": "deno lint -c deno.json"
   }
 }

@@ -2,14 +2,15 @@
   "$schema": "https://dpmland.deno.dev/schema",
   "name": "bad-cfg",
   "version": "0.1.0",
-  "description": "Dont make your config experience bad only disfrute with this",
+  "description": "Do you want to manage the settings of your apps? Make it easy with the help of Beno",
   "author": "The DPM Authors Team",
   "license": "MIT",
   "main": "mod.ts",
   "scripts": {
     "test": "deno test -A --unstable",
     "fmt": "deno fmt -c deno.json",
-    "lint": "deno lint -c deno.json"
+    "lint": "deno lint -c deno.json",
+    "fmt:check": "deno fmt -c deno.jsonc --check && deno lint -c deno.json"
   },
   "dependencies": {
     "path/": "0.152.0",

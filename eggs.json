@@ -1,11 +1,12 @@
 {
-  "name": "bad-cfg",
+  "$schema": "https://x.nest.land/eggs@0.3.10/src/schema.json",
+  "name": "beno",
   "entry": "mod.ts",
-  "description": "Dont make your config experience bad only disfrute with this",
-  "homepage": "https://github.com/the_name/bad-cfg",
-  "unstable": true,
+  "description": "Do you want to manage the settings of your apps? Make it easy with the help of Beno",
+  "homepage": "https://github.com/dpmland/beno",
+  "unstable": false,
   "unlisted": false,
-  "releaseType": "patch",
+  "releaseType": "major",
   "files": [
     "./mod.ts",
     "./src/**/*",
@@ -15,6 +16,6 @@
     ".git"
   ],
   "checkFormat": "deno task fmt:check",
-  "checkInstallation": "deno test",
+  "checkInstallation": true,
   "check": false
 }
