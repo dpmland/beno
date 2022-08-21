@@ -9,7 +9,7 @@ interface BenoCfgFunctions {
   get(key: string): unknown | undefined;
   content(): Record<string, unknown>[] | undefined;
   set(filename: string, object: BenoSetTypes): boolean;
-  has(filename: string, key: string): boolean;
+  has(filename: string, key:string): boolean;
 }
 
 export class Beno implements BenoCfgFunctions {
@@ -115,16 +115,6 @@ export class Beno implements BenoCfgFunctions {
     return false;
   }
 
-  has(key: string): boolean {
-    const content = this.content();
-
-    if (content == undefined) {
-      throw new Error(
-        'Beno ERROR: Not defined the content not found a valid file in the directory or not found the directory',
-      );
-    }
-
-    if (content.find((i) => key in i) != undefined) return true;
-    return false;
-  }
+  has(filename: string, key: string): boolean {
+}
 }

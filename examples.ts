@@ -4,8 +4,11 @@ const beno = new Beno({ encoder: 'json' });
 /* console.log(beno.get('example').string());
 console.log(beno.get('to').number());
 console.log(beno.get('yes').boolean()); */
-beno.set('other', { key: 'helloo', val: 'benooooooooo' });
-beno.set('hello.json', { key: 'bye', val: 'chauuuuuuuu' });
+// beno.set('other', { key: 'helloo', val: 'benooooooooo' });
+// beno.set('hello.json', { key: 'bye', val: 'chauuuuuuuu' });
+
+console.log(beno.has('helloo'));
+console.log(beno.has('notexistidkmaybeyes'));
 
 /* const JSONC = new Beno({encoder: 'jsonc'})
 console.log(JSONC.content())
